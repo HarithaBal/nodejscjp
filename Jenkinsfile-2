@@ -1,8 +1,6 @@
 pipeline {
   agent any
     
-  tools {nodejs "node"}
-    
   stages {
          
     stage('Build') {
@@ -15,7 +13,7 @@ pipeline {
             
     stage('Test') {
       steps {
-        sh 'node test'
+        sh 'node app.js'
       }
     }
   }
