@@ -12,7 +12,7 @@ pipeline {
             agent any
             steps {
               withSonarQubeEnv('Jenkins-Sonar-Integration') {
-                sh 'npm test'
+                sh 'node app.js'
               }
             }
           }
