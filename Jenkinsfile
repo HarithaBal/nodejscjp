@@ -16,12 +16,18 @@ pipeline {
               withSonarQubeEnv('NodeJS-Jenkins-Sonar-Integration') {
                 sh 'npm install sonar-scanner'
 		 sh'npm i sonar-scanner --save-dev'
-		  sh 'npm run sonar-scanner'    
-		        
-			
+		  sh 'npm run sonar-scanner'    	
               }
             }
           }
-        
+        stage('Building image') {
+      steps{
+        script {
+            docker.withRegistry( 'https://registry.hub.docker.com/', 'Jenkins-Docker-Integration' ){
+             myImage = docker.build ("NodeJSApp:latest")
+            }
+        }
+      }
     }
+  }
 }
