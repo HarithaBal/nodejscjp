@@ -15,6 +15,8 @@ pipeline {
             steps {
               withSonarQubeEnv('NodeJS-Jenkins-Sonar-Integration') {
                 sh 'npm install sonar-scanner'
+		 sh'npm i sonar-scanner --save-dev'
+		  sh 'npm run sonar-scanner'    
 		        
 			
               }
