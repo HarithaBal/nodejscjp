@@ -24,7 +24,7 @@ pipeline {
       steps{
         script {
             docker.withRegistry( 'https://registry.hub.docker.com/', 'Jenkins-Docker-Integration' ){
-             myImage = docker.build ("NodeJSApp:latest")
+             myImage = docker.build ("nodejsapp:latest")
             }
         }
       }
