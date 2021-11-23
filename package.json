@@ -12,6 +12,9 @@
   "engines": {
     "node": "8.0.0"
   },
+  "scripts": {
+    "sonar-scanner": "node_modules/sonar-scanner/bin/sonar-scanner"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/HarithaBal/nodejscjp.git"
