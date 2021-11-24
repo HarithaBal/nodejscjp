@@ -3,9 +3,8 @@ pipeline {
         environment {
         registry = "519852036875.dkr.ecr.us-east-2.amazonaws.com/my-node.js-app"
     }
-    stages {
-        
-        stage('Build') {
+     stages{
+         stage('Build') {
             steps {
                 nodejs(nodeJSInstallationName: 'Nodejs'){
                     sh 'npm install'
