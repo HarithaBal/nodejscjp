@@ -21,13 +21,7 @@ pipeline {
               }
             }
           }
-	  stage("Quality Gate") {
-            steps {
-              timeout(time: 1, unit: 'HOURS') {
-                waitForQualityGate abortPipeline: true
-              }
-            }
-          }  
+	 
 	     
         stage('Building image in EC2') {
       steps{
