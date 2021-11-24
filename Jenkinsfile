@@ -11,7 +11,7 @@ pipeline {
                 }
            }
         }
-         stage("test & SonarQube analysis") {
+         stage("SonarQube analysis") {
             agent any
             steps {
               withSonarQubeEnv('NodeJS-Jenkins-Sonar-Integration') {
@@ -21,10 +21,10 @@ pipeline {
               }
             }
           }
-	    stage("Quality Gate") {
-            steps {
-              timeout(time: 1, unit: 'HOURS') {
-                waitForQualityGate abortPipeline: true
+	    //stage("Quality Gate") {
+            //steps {
+              //timeout(time: 1, unit: 'HOURS') {
+                //waitForQualityGate abortPipeline: true
               }
             }
           }
