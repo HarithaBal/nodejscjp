@@ -52,7 +52,7 @@ pipeline {
 	     stage ('K8S Deploy') {
 		steps{
                 kubernetesDeploy(
-                    configs: 'nodejscjp/nodeapp.yaml',
+                    configs: 'nodejscjp/nodejsapp.yaml',
                     kubeconfigId: 'Kubernetes-Jenkins-Integration',
                     enableConfigSubstitution: true
                     )               
