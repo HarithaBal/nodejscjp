@@ -26,7 +26,7 @@ pipeline {
         stage('Building image in EC2') {
       steps{
         script {
-            docker.withRegistry( 'https://registry.hub.docker.com/', 'Jenkins-Docker-Integration' ){
+            docker.withRegistry( 'https://registry.hub.docker.com/','Jenkins-Docker-Integration'){
              myImage = docker.build ("nodejsapp:latest")
             }
         }
