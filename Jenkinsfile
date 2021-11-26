@@ -49,15 +49,12 @@ pipeline {
          }
         }
       }
-	     stage ('K8S Deploy') {
-		steps{
-                kubernetesDeploy(
-                    configs: 'nodejapp.yaml',
-                    kubeconfigId: 'Kubernetes-Jenkins-Integration',
-                    enableConfigSubstitution: true
-                    )               
+	     
+        stage("kubernetes deployment"){
+	steps{
+        sh 'kubectl apply -f .yaml'
+   	 }    
         }
-	}
      }
    }
 
