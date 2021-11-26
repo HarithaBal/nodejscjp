@@ -52,7 +52,7 @@ pipeline {
 	     
         stage("kubernetes deployment"){
 	steps{
-        sh 'kubectl apply -f .yaml'
+        sh 'kubectl apply -f nodejapp.yaml'
    	 }    
         }
      }
