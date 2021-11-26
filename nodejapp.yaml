@@ -18,7 +18,7 @@ spec:
         image: 519852036875.dkr.ecr.us-east-2.amazonaws.com/my-node.js-app:latest
         imagePullPolicy: Always
         ports:
-        - containerPort: 8096
+        - containerPort: 3000
 # service type loadbalancer
 ---
 apiVersion: v1
@@ -30,6 +30,6 @@ spec:
     app: nodejs-app
   ports:
     - protocol: TCP
-      port: 8096
-      targetPort: 8096
+      port: 3000
+      targetPort: 3000
   type: LoadBalancer
