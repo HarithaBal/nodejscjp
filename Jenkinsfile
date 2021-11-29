@@ -52,7 +52,11 @@ pipeline {
 	     
         stage("kubernetes deployment"){
 	steps{
-        sh 'kubectl apply -f nodejapp.yaml'
+          kubernetesDeploy(
+                    configs: 'nodejsapp.yaml',
+                    kubeconfigId: 'kubernetes',
+                    enableConfigSubstitution: true
+                    )               
    	 }    
         }
      }
