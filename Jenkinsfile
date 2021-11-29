@@ -53,7 +53,7 @@ pipeline {
         stage("kubernetes deployment"){
 	steps{
           kubernetesDeploy(
-                    configs: 'nodejsapp.yaml',
+                    configs: 'nodejapp.yaml ',
                     kubeconfigId: 'kubernetes',
                     enableConfigSubstitution: true
                     )               
