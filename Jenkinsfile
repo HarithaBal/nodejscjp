@@ -14,7 +14,7 @@ pipeline {
          stage("SonarQube analysis") {
             agent any
             steps {
-              withSonarQubeEnv('Jenkins-Sonar-Integr') {
+              withSonarQubeEnv('JENKINS-SONAR-INTEGRATION') {
                 sh 'npm install sonar-scanner'
 		 sh'npm i sonar-scanner --save-dev'
 		  sh 'npm run sonar-scanner'    	
