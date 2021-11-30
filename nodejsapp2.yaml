@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: nodejsapp2
-          image: robinnagpal/kubernetes-tutorial-003-node-app:latest
+          image: 519852036875.dkr.ecr.us-east-2.amazonaws.com/my-node.js-app@sha256:a7a957ed73e68919aaaf9fdd547460c2a09a26c968cb30f0428313aafb735cc7
           env:
             - name: APP_NAME
               value: nodejsapp2
