@@ -50,7 +50,11 @@ pipeline {
         }
       }
 	     
-        
+	 stage("kubernetes deployment"){
+	 steps{
+          sh 'kubectl apply -f nodejsapp.yaml'
+           }
+        }
        stage ('K8S Deploy') {
        steps{
                 kubernetesDeploy(
