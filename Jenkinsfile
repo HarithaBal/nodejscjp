@@ -50,7 +50,7 @@ pipeline {
         }
       }
 	     
-        stages{
+        
        stage ('K8S Deploy') {
        steps{
                 kubernetesDeploy(
@@ -60,8 +60,8 @@ pipeline {
                     )               
         }
      }
-  }
-     }
+    }
+     
    }
 
  
