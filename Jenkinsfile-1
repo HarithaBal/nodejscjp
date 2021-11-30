@@ -4,12 +4,11 @@ pipeline {
         registry = "519852036875.dkr.ecr.us-east-2.amazonaws.com/my-node.js-app"
     }
     stages{
-    stage("kubernetes deployment"){
-		 stage("kubernetes deployment"){
-              sh 'kubectl apply -f nodejsapp.yaml'
+	 stage("kubernetes deployment"){
+          sh 'kubectl apply -f nodejsapp.yaml'
            }
         }
-     }
+     
        stages{
        stage ('K8S Deploy') {
        steps{
