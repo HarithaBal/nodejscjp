@@ -45,9 +45,20 @@ pipeline {
 		steps{
 		 sh 'chmod +x changeTag.sh'
 		 sh './changeTag.sh ${DOCKER_TAG}'
+		 sshagent(['BastionHost']) {
+   		  sh 'scp -o StrictHostKeyChecking=no service.yml  node-app-pod.yml ubuntu@3.21.21.70:/home/ubuntu/'
+		  scripts{
+		  	try{
+			sh 'ssh ubuntu@3.21.21.70 kubectl apply -f .'
+			}catch(error){
+			sh 'ssh ubuntu@3.21.21.70 kubectl create -f .'
+				    }
+			      }
+		           }
+			}
 		 
 		 }
-    	 }
+    	 
     }
      
    }
