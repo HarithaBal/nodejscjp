@@ -1,5 +1,5 @@
 
-node ("slave") {
+node ("slave1") {
   def image
   def npmHome = tool 'Nodejs'
     agent any
