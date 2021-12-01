@@ -3,6 +3,7 @@ pipeline {
     agent any
         environment {
         registry = "519852036875.dkr.ecr.us-east-2.amazonaws.com/my-node.js-app"
+	DOCKER_TAG = getDockerTag()
     }
      stages{
          stage('Build') {
@@ -17,7 +18,7 @@ pipeline {
       steps{
         script {
             docker.withRegistry( 'https://registry.hub.docker.com/','Jenkins-Docker-Integration'){
-             myImage = docker.build ("nodejsapp:latest")
+             myImage = docker.build ("nodejsapp: ${DOCKER_TAG}")
             }
         }
       }
@@ -35,21 +36,15 @@ pipeline {
      steps{  
          script {
                 sh 'aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 519852036875.dkr.ecr.us-east-2.amazonaws.com'
-                sh 'docker push 519852036875.dkr.ecr.us-east-2.amazonaws.com/my-node.js-app:latest'
+                sh 'docker push 519852036875.dkr.ecr.us-east-2.amazonaws.com/my-node.js-app:${DOCKER_TAG}'
          }
         }
       }
 	     
-	
-       stage ('K8S Deploy') {
-       steps{
-                kubernetesDeploy(
-                    configs: 'nodejsapp.yaml',
-                    kubeconfigId: 'Kubernetes-Jenkins-Integration',
-                    enableConfigSubstitution: true
-                    )               
-        }
-     }
+	stage('Deploy to K8S'){
+		steps{
+		 sh 'chmod +x ChangeTag.sh'
+     
     }
      
    }
