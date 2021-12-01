@@ -1,4 +1,7 @@
-pipeline {
+
+node ("slave") {
+  def image
+  def npmHome = tool 'Nodejs'
     agent any
         environment {
         registry = "519852036875.dkr.ecr.us-east-2.amazonaws.com/my-node.js-app"
@@ -44,7 +47,7 @@ pipeline {
        steps{
                 kubernetesDeploy(
                     configs: 'nodejscjp/nodejsapp.yaml',
-                    kubeconfigId: 'K8S',
+                    kubeconfigId: 'Kubernetes-Jenkins-Integration',
                     enableConfigSubstitution: true
                     )               
         }
