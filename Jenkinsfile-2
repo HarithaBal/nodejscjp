@@ -13,10 +13,16 @@
                 }
            }
         }
-	stage('Sonnar Analysis'){
-	steps{
-	 }
-	}
+	 stage("SonarQube analysis") {
+            agent any
+            steps {
+              withSonarQubeEnv('Jenkins-Sonar-Integration') {
+                sh 'npm install sonar-scanner'
+		 sh'npm i sonar-scanner --save-dev'
+		  sh 'npm run sonar-scanner'    	
+              }
+            }
+          }
 	     
         stage('Building image in EC2') {
       steps{
