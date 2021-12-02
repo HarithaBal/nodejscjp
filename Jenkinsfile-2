@@ -47,9 +47,9 @@
    		  sh 'scp -o StrictHostKeyChecking=no service.yml  pod.yml ubuntu@3.21.21.70:/home/ubuntu/'
 		 script{
 		  try{
-			sh 'ssh ubuntu@3.21.21.70 kubectl apply -f .'
+			sh 'ssh ubuntu@3.21.21.70 sudo kubectl apply -f .'
 			}catch(error){
-			sh 'ssh ubuntu@3.21.21.70 kubectl create -f .'
+			sh 'ssh ubuntu@3.21.21.70 sudo kubectl create -f .'
 				    }
 			      }
 		           }
