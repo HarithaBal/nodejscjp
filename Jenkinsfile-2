@@ -13,6 +13,10 @@
                 }
            }
         }
+	stage('Sonnar Analysis'){
+	steps{
+	 }
+	}
 	     
         stage('Building image in EC2') {
       steps{
