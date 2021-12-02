@@ -44,7 +44,7 @@
 	stage('Deploy to K8S'){
 		steps{
 		 sshagent(['BastionHost']) {
-   		  sh 'scp -o StrictHostKeyChecking=no service.yml  pod.yml ubuntu@3.21.21.70:/home/ubuntu'
+   		  sh 'scp -o StrictHostKeyChecking=no nodejsapp.yml ubuntu@3.21.21.70:/home/ubuntu'
 		 script{
 		  try{
 			sh 'ssh ubuntu@3.21.21.70 kubectl apply -f .'
