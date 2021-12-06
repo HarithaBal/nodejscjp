@@ -55,15 +55,7 @@ pipeline {
           sh 'kubectl apply -f nodejsapp.yaml'
            }
         }
-       stage ('K8S Deploy') {
-       steps{
-                kubernetesDeploy(
-                    configs: 'nodejscjp/nodejsapp.yaml',
-                    kubeconfigId: 'K8S',
-                    enableConfigSubstitution: true
-                    )               
-        }
-     }
+      
     }
      
    }
