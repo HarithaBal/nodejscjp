@@ -1,23 +1,59 @@
 pipeline {
     agent any
-    environment {
+        environment {
         registry = "519852036875.dkr.ecr.us-east-2.amazonaws.com/my-node.js-app"
     }
-    stages{
-	 stage("kubernetes deployment"){
-          sh 'kubectl apply -f nodejsapp.yaml'
+     stages{
+         stage('Build') {
+            steps {
+                nodejs(nodeJSInstallationName: 'Nodejs'){
+                    sh 'npm install'
+                }
            }
         }
-     
-       stages{
-       stage ('K8S Deploy') {
-       steps{
-                kubernetesDeploy(
-                    configs: 'nodejscjp/nodejsapp.yaml',
-                    kubeconfigId: 'Kubernetes-Jenkins-Integration',
-                    enableConfigSubstitution: true
-                    )               
+         
+	     
+        stage('Building image in EC2') {
+      steps{
+        script {
+            docker.withRegistry( 'https://registry.hub.docker.com/','Jenkins-Docker-Integration'){
+             myImage = docker.build ("nodejsapp:latest")
+            }
         }
-     }
-  }
-}
+      }
+    }
+    stage('Build Registry') {
+      steps{
+        script {
+          dockerImage = docker.build registry
+        }
+      }
+    }
+  
+     // Uploading Docker images into AWS ECR
+    stage('Pushing to ECR') {
+     steps{  
+         script {
+                sh 'aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 519852036875.dkr.ecr.us-east-2.amazonaws.com'
+                sh 'docker push 519852036875.dkr.ecr.us-east-2.amazonaws.com/my-node.js-app:latest'
+         }
+        }
+      }
+	     
+	
+	      stage ('K8S Deploy') {
+		 steps{
+                kubernetesDeploy(
+                    configs: 'reactapp.yaml',
+                    kubeconfigId: 'K8S',
+                    enableConfigSubstitution: true
+                    )           
+            }
+            
+		      
+        }
+    }
+     
+   }
+
+ 
